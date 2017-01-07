@@ -369,7 +369,7 @@ $(OBJDIR)/%.s : %.c $(CONFFILES) | $(OBJDIR)/src
 # Assemble: create object files from assembler source files.
 $(OBJDIR)/%.o : %.S $(OBJDIR)/asmconfig.h $(CONFFILES) | $(OBJDIR)/src
 	$(E) "  AS     $<"
-	$(Q)$(CC) -c $(ALL_ASFLAGS) $< -o $@
+	$(CC) -c $(ALL_ASFLAGS) $< -o $@
 
 # Create preprocessed source for use in sending a bug report.
 $(OBJDIR)/%.i : %.c $(CONFFILES) | $(OBJDIR)/src
@@ -411,4 +411,3 @@ clean:
 .PHONY : all sizebefore sizeafter gccversion \
 build elf hex eep lss sym coff extcoff \
 clean clean_list program debug gdb-config doxygen
-

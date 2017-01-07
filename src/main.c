@@ -47,6 +47,19 @@
 #include "ustring.h"
 #include "utils.h"
 
+void test(void);
+void test(void) {
+  while (1) {
+    uart_puts_P(PSTR("buttons_read(): "));
+    uart_puthex(buttons_read());
+    uart_puts_P(PSTR(" sdcard_detect():"));
+    uart_puthex(sdcard_detect());
+    uart_puts_P(PSTR(" sdcard_wp():"));
+    uart_puthex(sdcard_wp());
+    uart_putcrlf();
+    uart_flush();
+  }
+}
 
 #if defined(__AVR__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ > 1))
 int main(void) __attribute__((OS_main));
@@ -63,6 +76,7 @@ int main(void) {
   /* Due to an erratum in the LPC17xx chips anything that may change */
   /* peripheral clock scalers must come before system_init_late()    */
   uart_init();
+
 #ifndef SPI_LATE_INIT
   spi_init(SPI_SPEED_SLOW);
 #endif
@@ -88,9 +102,18 @@ int main(void) {
   filesystem_init(0);
   change_init();
 
-  uart_puts_P(PSTR("\r\nsd2iec " VERSION " #"));
+  uart_puts_P(PSTR("\r\nsd2iec " VERSION " XXX #"));
   uart_puthex(device_address);
   uart_putcrlf();
+  // uart_flush();
+  // test();
+
+  uart_puts_P(PSTR("sdcard_interface_init(): EIMSK"));
+  uart_puthex(EIMSK);
+  uart_puts_P(PSTR(" EICRB:"));
+  uart_puthex(EICRB);
+  uart_putcrlf();
+  uart_flush();
 
 #ifdef CONFIG_REMOTE_DISPLAY
   /* at this point all buffers should be free, */

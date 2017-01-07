@@ -174,6 +174,12 @@ SD_CHANGE_HANDLER {
     disk_state = DISK_CHANGED;
   else
     disk_state = DISK_REMOVED;
+#if 0 //#ifdef CONFIG_UART_DEBUG
+  uart_puts_P(PSTR("\r\nSD_CHANGE_HANDLER(): sdcard_detect():"));
+  uart_puthex(sdcard_detect());
+  uart_putcrlf();
+  uart_flush();
+#endif
 }
 #endif
 

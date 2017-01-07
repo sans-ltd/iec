@@ -15,3 +15,7 @@ obj-*
 *.d64
 *.d81
 
+.pioenvs
+.piolibdeps
+.clang_complete
+.gcc-flags.json

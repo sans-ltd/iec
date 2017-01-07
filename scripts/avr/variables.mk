@@ -42,6 +42,11 @@ else ifeq ($(MCU),atmega2561)
   EFUSE = 0xfd
   HFUSE = 0x93
   LFUSE = 0xef
+else ifeq ($(MCU),atmega2560)
+	BINARY_LENGTH = 0x3f000
+#	EFUSE = 0xfd
+#	HFUSE = 0x93
+#	LFUSE = 0xef	
 else ifeq ($(MCU),atmega644)
   BINARY_LENGTH = 0xf000
   EFUSE = 0xfd
@@ -163,4 +168,3 @@ endif
 ifeq ($(CONFIG_STACK_TRACKING),y)
   ARCH_CFLAGS += -finstrument-functions
 endif
-

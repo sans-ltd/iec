@@ -78,8 +78,11 @@ void poison_memory(void) {
 
 /* Early system initalisation */
 void system_init_early(void) {
-#if defined __AVR_ATmega644__  || defined __AVR_ATmega644P__ || \
-    defined __AVR_ATmega1281__ || defined __AVR_ATmega2561__ || \
+#if defined __AVR_ATmega644__  || \
+    defined __AVR_ATmega644P__ || \
+    defined __AVR_ATmega1281__ || \
+    defined __AVR_ATmega2560__ || \
+    defined __AVR_ATmega2561__ || \
     defined __AVR_ATmega1284P__
   asm volatile("in  r24, %0\n"
                "ori r24, 0x80\n"
@@ -135,4 +138,3 @@ void disable_interrupts(void) {
 void enable_interrupts(void) {
   sei();
 }
-
