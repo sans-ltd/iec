@@ -102,10 +102,16 @@ int main(void) {
   filesystem_init(0);
   change_init();
 
+  set_busy_led(0);
+  set_dirty_led(1);
   uart_puts_P(PSTR("\r\nsd2iec " VERSION " XXX #"));
   uart_puthex(device_address);
   uart_putcrlf();
-  // uart_flush();
+  set_busy_led(1);
+  set_dirty_led(1);
+  uart_flush();
+  set_busy_led(0);
+  set_dirty_led(0);
   // test();
 
   uart_puts_P(PSTR("sdcard_interface_init(): EIMSK"));

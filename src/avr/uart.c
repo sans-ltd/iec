@@ -151,6 +151,7 @@ void uart_init(void) {
   // I really don't like random #ifdefs in the code =(
 #if defined __AVR_ATmega32__
   UCSRC = _BV(URSEL) | _BV(UCSZ1) | _BV(UCSZ0);
+  #error "NOGO UART CONFIG"
 #else
   UCSRC = _BV(UCSZ1) | _BV(UCSZ0);
 #endif

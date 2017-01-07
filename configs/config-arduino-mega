@@ -50,7 +50,8 @@ CONFIG_LINKER_RELAX=n
 
 # MCU frequency in Hz - the fastloader code is hardcoded for 8MHz
 CONFIG_MCU_FREQ=16000000
-#CONFIG_MCU_FREQ=8000000
+# Using board_init() to configure the pre-scaler...
+# CONFIG_MCU_FREQ=8000000
 
 # Add a bootloader signature
 CONFIG_BOOTLOADER=n

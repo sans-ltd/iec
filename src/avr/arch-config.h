@@ -1351,13 +1351,13 @@ static inline void buttons_init(void) {
 
 
 /*** board-specific initialisation ***/
-/* Currently used on uIEC/CF and uIEC/SD only */
-//#define HAVE_BOARD_INIT
-//static inline void board_init(void) {
-//  // turn on power LED
-//  DDRG  |= _BV(PG1);
-//  PORTG |= _BV(PG1);
-//}
+#define HAVE_BOARD_INIT
+static inline void board_init(void) {
+  // Set clock pre-scaler to 2, because the hardware has soldered a 16MHz
+  // oscillator
+  // CLKPR = _PV(CLKPS0);
+  // CLKPR = _PV(CLKPCE);
+}
 
 #else
 #  error "CONFIG_HARDWARE_VARIANT is unset or set to an unknown value."
