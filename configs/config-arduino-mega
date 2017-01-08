@@ -65,11 +65,12 @@ CONFIG_UART_DEBUG=y
 
 # Baud rate of the UART, not used if CONFIG_UART_DEBUG is disabled
 #CONFIG_UART_BAUDRATE=115200
-CONFIG_UART_BAUDRATE=9600
+# The *2 is a work around for dividing the clock by two in arch-config.h
+CONFIG_UART_BAUDRATE=38400*2
 
 # log2 of the UART buffer size, i.e. 6 for 64, 7 for 128, 8 for 256 etc.
 CONFIG_UART_BUF_SHIFT=8
-CONFIG_DEADLOCK_ME_HARDER=y
+# CONFIG_DEADLOCK_ME_HARDER=y
 
 # Output a hex dump of all received commands via serial?
 # Not used if CONFIG_UART_DEBUG is disabled.
@@ -78,43 +79,43 @@ CONFIG_COMMAND_CHANNEL_DUMP=y
 
 # Enable Turbodisk soft fastloader support
 # This option requires an external crystal oscillator!
-#CONFIG_LOADER_TURBODISK=y
+CONFIG_LOADER_TURBODISK=y
 
 # Enable Final Cartridge III fast loader
-#CONFIG_LOADER_FC3=y
+CONFIG_LOADER_FC3=y
 
 # Enable Dreamload fast loader
-#CONFIG_LOADER_DREAMLOAD=y
+CONFIG_LOADER_DREAMLOAD=y
 
 # Enable ULoad Model 3 fast loader
-#CONFIG_LOADER_ULOAD3=y
+CONFIG_LOADER_ULOAD3=y
 
 # Enable G.I. Joe fast loader
-#CONFIG_LOADER_GIJOE=y
+CONFIG_LOADER_GIJOE=y
 
 # Enable Epyx Fast Load cartridge fast loader
-#CONFIG_LOADER_EPYXCART=y
+CONFIG_LOADER_EPYXCART=y
 
 # Enable GEOS fast loaders
-#CONFIG_LOADER_GEOS=y
+CONFIG_LOADER_GEOS=y
 
 # Enable Wheels fast loaders (requires CONFIG_LOADER_GEOS=y)
-#CONFIG_LOADER_WHEELS=y
+CONFIG_LOADER_WHEELS=y
 
 # Enable Nippon fast loader
-#CONFIG_LOADER_NIPPON=y
+CONFIG_LOADER_NIPPON=y
 
 # Enable (some) Action Replay 6 fast loaders
-#CONFIG_LOADER_AR6=y
+CONFIG_LOADER_AR6=y
 
 # Enable ELoad Version 1 fast loader
-#CONFIG_LOADER_ELOAD1=y
+CONFIG_LOADER_ELOAD1=y
 
 # Enable Maniac Mansion/Zak McKracken fast loader
-#CONFIG_LOADER_MMZAK=y
+CONFIG_LOADER_MMZAK=y
 
 # Enable N0stalgia fastloaders
-#CONFIG_LOADER_N0SDOS=y
+CONFIG_LOADER_N0SDOS=y
 
 # Enable DolphinDOS parallel speeder
 #CONFIG_PARALLEL_DOLPHIN=y

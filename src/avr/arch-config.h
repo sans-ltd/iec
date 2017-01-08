@@ -1231,13 +1231,15 @@ static inline __attribute__((always_inline)) void sdcard2_set_ss(uint8_t state) 
 /* device_hw_address() returns the hardware-selected device address */
 static inline uint8_t device_hw_address(void) {
   // return 8 + !(PIND & _BV(PD7)) + 2*!(PIND & _BV(PD5));
-  return 9;
+  return 8 + (!(PINL & _BV(PINL1)) + 2*!(PINL & _BV(PINL3))); 
 }
 
 /* Configure hardware device address pins */
 static inline void device_hw_address_init(void) {
   // DDRD  &= ~(_BV(PD7) | _BV(PD5));
   // PORTD |=   _BV(PD7) | _BV(PD5);
+  DDRL = 0;
+  PORTL = 255;
 }
 
 
@@ -1359,7 +1361,7 @@ static inline void board_init(void) {
   // CLKPR = _PV(CLKPCE);
 }
 
-// #define CLOCK_PRESCALE clock_div_2
+#define CLOCK_PRESCALE clock_div_2
 
 #else
 #  error "CONFIG_HARDWARE_VARIANT is unset or set to an unknown value."

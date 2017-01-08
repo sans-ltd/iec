@@ -46,9 +46,21 @@
 #include "uart.h"
 #include "ustring.h"
 #include "utils.h"
+#include "iec-bus.h"
 
 void test(void);
 void test(void) {
+  // IEC Ports as Input
+  IEC_DDR &= ~IEC_BIT_ATN;
+  IEC_DDR &= ~IEC_BIT_CLOCK;
+  IEC_DDR &= ~IEC_BIT_DATA;
+  IEC_DDR &= ~IEC_BIT_SRQ;
+  // IEC Ports Pull-Up
+  IEC_PORT |= IEC_BIT_ATN;
+  IEC_PORT |= IEC_BIT_CLOCK;
+  IEC_PORT |= IEC_BIT_DATA;
+  IEC_PORT |= IEC_BIT_SRQ;
+
   while (1) {
     uart_puts_P(PSTR("buttons_read(): "));
     uart_puthex(buttons_read());
@@ -56,6 +68,10 @@ void test(void) {
     uart_puthex(sdcard_detect());
     uart_puts_P(PSTR(" sdcard_wp():"));
     uart_puthex(sdcard_wp());
+    uart_puts_P(PSTR(" iec pins:"));
+    uart_puthex(iec_bus_read());
+    uart_puts_P(PSTR(" ~PINL:"));
+    uart_puthex(~PINL);
     uart_putcrlf();
     uart_flush();
   }
