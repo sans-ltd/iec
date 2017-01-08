@@ -64,9 +64,9 @@ CONFIG_BOOT_DEVID=0x49454321
 CONFIG_UART_DEBUG=y
 
 # Baud rate of the UART, not used if CONFIG_UART_DEBUG is disabled
-#CONFIG_UART_BAUDRATE=115200
+CONFIG_UART_BAUDRATE=115200
 # The *2 is a work around for dividing the clock by two in arch-config.h
-CONFIG_UART_BAUDRATE=38400*2
+# CONFIG_UART_BAUDRATE=38400*2
 
 # log2 of the UART buffer size, i.e. 6 for 64, 7 for 128, 8 for 256 etc.
 CONFIG_UART_BUF_SHIFT=8
