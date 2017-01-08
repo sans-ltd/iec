@@ -70,7 +70,7 @@ int main(void) {
   system_init_early();
   leds_init();
 
-  set_busy_led(1);
+  set_busy_led(0);
   set_dirty_led(0);
 
   /* Due to an erratum in the LPC17xx chips anything that may change */
@@ -86,7 +86,6 @@ int main(void) {
 
   /* Second part of system initialisation, switches to full speed on ARM */
   system_init_late();
-  enable_interrupts();
 
   /* Internal-only initialisation, called here because it's faster */
   buffers_init();
@@ -102,22 +101,26 @@ int main(void) {
   filesystem_init(0);
   change_init();
 
+  enable_interrupts();
+
   set_busy_led(0);
-  set_dirty_led(1);
+  set_dirty_led(0);
   uart_puts_P(PSTR("\r\nsd2iec " VERSION " XXX #"));
   uart_puthex(device_address);
   uart_putcrlf();
-  set_busy_led(1);
+  set_busy_led(0);
   set_dirty_led(1);
   uart_flush();
-  set_busy_led(0);
-  set_dirty_led(0);
   // test();
 
   uart_puts_P(PSTR("sdcard_interface_init(): EIMSK"));
   uart_puthex(EIMSK);
+  uart_puts_P(PSTR(" EICRA:"));
+  uart_puthex(EICRA);
   uart_puts_P(PSTR(" EICRB:"));
   uart_puthex(EICRB);
+  uart_puts_P(PSTR(" UCSR1B:"));
+  uart_puthex(UCSR1B);
   uart_putcrlf();
   uart_flush();
 

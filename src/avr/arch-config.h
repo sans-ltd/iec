@@ -1282,10 +1282,10 @@ static inline void toggle_dirty_led(void) {
 #  define IEC_PORT  PORTD
 
 /* Pins assigned for the IEC lines */
-#  define IEC_PIN_ATN   PD3
-#  define IEC_PIN_DATA  PD2
+#  define IEC_PIN_ATN   PD0
 #  define IEC_PIN_CLOCK PD1
-#  define IEC_PIN_SRQ   PD0
+#  define IEC_PIN_DATA  PD2
+#  define IEC_PIN_SRQ   PD3
 
 /* Use separate input/output lines?                                    */
 /* The code assumes that the input is NOT inverted, but the output is. */
@@ -1303,10 +1303,10 @@ static inline void toggle_dirty_led(void) {
 //#  define IEC_PORTIN     PORTX
 
 /* ATN interrupt (required) */
-#  define IEC_ATN_INT         INT3
-#  define IEC_ATN_INT_VECT    INT3_vect
+#  define IEC_ATN_INT         INT0
+#  define IEC_ATN_INT_VECT    INT0_vect
 static inline void iec_interrupts_init(void) {
-  EIMSK |= _BV(INT3);
+  EIMSK |= _BV(INT0);
 }
 
 /* CLK interrupt (not required) */
@@ -1358,6 +1358,8 @@ static inline void board_init(void) {
   // CLKPR = _PV(CLKPS0);
   // CLKPR = _PV(CLKPCE);
 }
+
+// #define CLOCK_PRESCALE clock_div_2
 
 #else
 #  error "CONFIG_HARDWARE_VARIANT is unset or set to an unknown value."
