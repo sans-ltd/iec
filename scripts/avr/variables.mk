@@ -2,9 +2,12 @@
 
 #---------------- Source code ----------------
 ASMSRC = avr/crc7asm.S
-
 ifeq ($(CONFIG_HAVE_IEC),y)
-  ASMSRC += avr/fastloader-ll.S
+  ifeq ($(CONFIG_MCU),atmega2560)
+    ASMSRC += avr/fastloader-ll16.S
+  else
+    ASMSRC += avr/fastloader-ll.S
+  endif
 endif
 
 ifdef NEED_I2C
