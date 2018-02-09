@@ -1229,6 +1229,8 @@ static inline __attribute__((always_inline)) void sdcard2_set_ss(uint8_t state) 
 
 /*** Device address selection ***/
 /* device_hw_address() returns the hardware-selected device address */
+#ifdef MEGA2560_ON_SHIELD_DIP_SWITCH
+/* DIP Switch on the shield */
 static inline uint8_t device_hw_address(void) {
   // return 8 + !(PIND & _BV(PD7)) + 2*!(PIND & _BV(PD5));
   return 8 + (!(PINL & _BV(PINL1)) + 2*!(PINL & _BV(PINL3)));
@@ -1241,6 +1243,21 @@ static inline void device_hw_address_init(void) {
   DDRL = 0;
   PORTL = 255;
 }
+#else
+/* DIP Switch on the rear */
+static inline uint8_t device_hw_address(void) {
+  // return 8 + !(PIND & _BV(PD7)) + 2*!(PIND & _BV(PD5));
+  return 8 + (!(PINK & _BV(PINK7)) + 2*!(PINK & _BV(PINK6)));
+}
+
+/* Configure hardware device address pins */
+static inline void device_hw_address_init(void) {
+  // DDRD  &= ~(_BV(PD7) | _BV(PD5));
+  // PORTD |=   _BV(PD7) | _BV(PD5);
+  DDRK = 0;
+  PORTK = 255;
+}
+#endif
 
 
 /*** LEDs ***/
@@ -1251,30 +1268,30 @@ static inline void leds_init(void) {
   /* Note: Depending on the chip and register these lines can compile */
   /*       to one instruction each on AVR. For two bits this is one   */
   /*       instruction shorter than "DDRC |= _BV(PC0) | _BV(PC1);"    */
-  DDRH |= _BV(PH4);
-  DDRH |= _BV(PH3);
+  DDRA |= _BV(PA1);
+  DDRA |= _BV(PA3);
 }
 
 /* --- "BUSY" led, recommended color: green (usage similiar to 1541 LED) --- */
 static inline __attribute__((always_inline)) void set_busy_led(uint8_t state) {
   if (state)
-    PORTH &= ~_BV(PH3);
+    PORTA &= ~_BV(PA1);
   else
-    PORTH |= _BV(PH3);
+    PORTA |= _BV(PA1);
 }
 
 /* --- "DIRTY" led, recommended color: red (errors, unwritten data in memory) --- */
 static inline __attribute__((always_inline)) void set_dirty_led(uint8_t state) {
   if (state)
-    PORTH &= ~_BV(PH4);
+    PORTA &= ~_BV(PA3);
   else
-    PORTH |= _BV(PH4);
+    PORTA |= _BV(PA3);
 }
 
 /* Toggle function used for error blinking */
 static inline void toggle_dirty_led(void) {
   /* Sufficiently new AVR cores have a toggle function */
-  PINH |= _BV(PH4);
+  PINA |= _BV(PA3);
 }
 
 
