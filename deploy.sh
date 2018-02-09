@@ -1,1 +1,1 @@
-/home/gonzo/tools/arduino-1.6.12/hardware/tools/avr/bin/avrdude -C/home/gonzo/tools/arduino-1.6.12/hardware/tools/avr/etc/avrdude.conf -patmega2560 -cwiring -P/dev/ttyACM0 -b115200 -D -Uflash:w:obj-m2560-arduino-mega/sd2iec.hex:i
+../../.platformio/packages/tool-avrdude/avrdude -C../../.platformio/packages/tool-avrdude/avrdude.conf -patmega2560 -cwiring -P/dev/ttyUSB0 -b115200 -D -Uflash:w:obj-m2560-arduino-mega/sd2iec.hex:i
