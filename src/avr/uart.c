@@ -31,6 +31,15 @@
 #include "avrcompat.h"
 #include "uart.h"
 
+#ifdef __AVR_AT90USB1286__
+#include "usb_debug_only.h"
+#endif
+
+#ifdef __AVR_AT90USB1286__
+inline void uart_putc(char c) {
+  usb_debug_putchar(c);
+}
+#else
 static uint8_t txbuf[1 << CONFIG_UART_BUF_SHIFT];
 static volatile uint16_t read_idx;
 static volatile uint16_t write_idx;
@@ -55,6 +64,7 @@ void uart_putc(char c) {
   //if (read_idx == write_idx) PORTD |= _BV(PD7);
   UCSRB |= _BV(UDRIE);
 }
+#endif
 
 void uart_puthex(uint8_t num) {
   uint8_t tmp;
@@ -122,9 +132,16 @@ uint8_t uart_getc(void) {
   return UDR;
 }
 
+#ifdef __AVR_AT90USB1286__
+inline void uart_flush(void) {
+  usb_debug_flush_output();
+}
+#else
 void uart_flush(void) {
   while (read_idx != write_idx) ;
 }
+#endif
+
 
 void uart_puts_P(const char *text) {
   uint8_t ch;
@@ -141,6 +158,12 @@ void uart_putcrlf(void) {
 
 static FILE mystdout = FDEV_SETUP_STREAM(ioputc, NULL, _FDEV_SETUP_WRITE);
 
+#ifdef __AVR_AT90USB1286__
+void uart_init() {
+  usb_init();
+  stdout = &mystdout;
+}
+#else
 void uart_init(void) {
   /* Seriellen Port konfigurieren */
   uint32_t clock = F_CPU;
@@ -167,3 +190,4 @@ void uart_init(void) {
   read_idx  = 0;
   write_idx = 0;
 }
+#endif

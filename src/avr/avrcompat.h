@@ -32,7 +32,7 @@
  || defined __AVR_ATmega1281__ \
  || defined __AVR_ATmega2560__ \
  || defined __AVR_ATmega2561__ \
- || defined __AVR_ATmega1284P__
+ || defined __AVR_ATmega1284P__ 
 
 #  ifdef USE_UART1
 #    define RXC   RXC1
@@ -70,6 +70,25 @@
 #    define USART_UDRE_vect USART0_UDRE_vect
 #    define USART_RX_vect   USART0_RX_vect
 #  endif
+
+#elif defined __AVR_AT90USB1286__ 
+#    define RXC   RXC1
+#    define RXEN  RXEN1
+#    define TXC   TXC1
+#    define TXEN  TXEN1
+#    define UBRRH UBRR1H
+#    define UBRRL UBRR1L
+#    define UCSRA UCSR1A
+#    define UCSRB UCSR1B
+#    define UCSRC UCSR1C
+#    define UCSZ0 UCSZ10
+#    define UCSZ1 UCSZ11
+#    define UDR   UDR1
+#    define UDRIE UDRIE1
+#    define RXCIE RXCIE1
+#    define USART_UDRE_vect USART1_UDRE_vect
+#    define USART_RX_vect   USART1_RX_vect
+#    define U2X0 U2X1
 
 #elif defined __AVR_ATmega48__ || defined __AVR_ATmega88__ || defined __AVR_ATmega168__
 /* These chips include the USART number in their register names, */
@@ -150,6 +169,19 @@
 #  define HWI2C_PORT PORTD
 #  define HWI2C_SDA  _BV(PD1)
 #  define HWI2C_SCL  _BV(PD0)
+
+#elif defined __AVR_AT90USB1286__
+
+#  define SPI_PORT  PORTB
+#  define SPI_DDR   DDRB
+#  define SPI_SS    _BV(PB0)
+#  define SPI_SCK   _BV(PB1)
+#  define SPI_MOSI  _BV(PB2)
+#  define SPI_MISO  _BV(PB3)
+// #  define HWI2C_PORT PORTD
+// #  define HWI2C_SDA  _BV(PD1)
+// #  define HWI2C_SCL  _BV(PD0)
+
 
 #elif defined __AVR_ATmega48__ || defined __AVR_ATmega88__ || defined __AVR_ATmega168__
 

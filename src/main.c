@@ -70,8 +70,8 @@ void test(void) {
     uart_puthex(sdcard_wp());
     uart_puts_P(PSTR(" iec pins:"));
     uart_puthex(iec_bus_read());
-    uart_puts_P(PSTR(" ~PINL:"));
-    uart_puthex(~PINL);
+    // uart_puts_P(PSTR(" ~PINL:"));
+    // uart_puthex(~PINL);
     uart_putcrlf();
     uart_flush();
   }

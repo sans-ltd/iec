@@ -88,6 +88,7 @@ endif
 
 ifeq ($(CONFIG_UART_DEBUG),y)
   SRC += $(CONFIG_ARCH)/uart.c
+  SRC += $(CONFIG_ARCH)/usb_debug_only.c
 endif
 
 ifeq ($(CONFIG_REMOTE_DISPLAY),y)

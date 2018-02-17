@@ -46,7 +46,12 @@ else ifeq ($(MCU),atmega2560)
 	BINARY_LENGTH = 0x3f000
 #	EFUSE = 0xfd
 #	HFUSE = 0x93
-#	LFUSE = 0xef	
+#	LFUSE = 0xef
+else ifeq ($(MCU),at90usb1286)
+  BINARY_LENGTH = 0x1f000
+#  EFUSE = 0xff
+#  HFUSE = 0x91
+#  LFUSE = 0xaf	
 else ifeq ($(MCU),atmega644)
   BINARY_LENGTH = 0xf000
   EFUSE = 0xfd
